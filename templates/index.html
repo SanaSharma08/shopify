@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopify Products</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shopify Products</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Tags</th>
+                <th>Variants</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.title }}</td>
+                <td><p>{{ product.body_html | safe }}</p></td>
+                <td>{{ product.product_type }}</td>
+                <td>{{ product.tags }}</td>
+                <td>
+                    <ul>
+                        {% for variant in product.variants %}
+                        <li>
+                            ID: {{ variant.id }}, Title: {{ variant.title }},
+                            Price: {{ variant.price }},
+                            Compare Price: {{ variant.compare_at_price }},
+                            SKU: {{ variant.sku }},
+                            Quantity: {{ variant.inventory_quantity }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
